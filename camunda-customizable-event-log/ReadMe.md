@@ -114,6 +114,6 @@ But - to be honest -  I am not really sure if this is the way to go. Some disadv
 * the GlobalExecutionListener might be better used to do something else (and I only have one)
 * ...
 
-So - if you could follow me - I would **love to here your opinion** about my approach. Feel free to contact me at Twitter (@FrVaBe) or open an issue here with your comment.
+So - if you could follow me - I would **love to here your opinion** about my approach. Feel free to contact me at Twitter ([@FrVaBe](https://twitter.com/FrVaBe)) or open an issue here with your comment.
 
 If you want to have a deeper look at the solution just clone the project. The `camunda-customizable-event-log` contains a complete Maven project where you can find a unit test that starts a process and observe the behavior.
