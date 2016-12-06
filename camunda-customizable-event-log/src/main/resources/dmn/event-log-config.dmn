@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="definitions_1wtl12f" name="definitions" namespace="http://camunda.org/schema/1.0/dmn">
+  <decision id="eventLog" name="EventLog">
+    <decisionTable id="decisionTable">
+      <input id="input1" label="activityId" camunda:inputVariable="activityId">
+        <inputExpression id="inputExpression1" typeRef="string" />
+      </input>
+      <input id="InputClause_04bjx5t" label="eventName" camunda:inputVariable="eventName">
+        <inputExpression id="LiteralExpression_07e6t0w" typeRef="string" />
+      </input>
+      <output id="output1" label="Log" name="" typeRef="string" />
+      <rule id="row-187037128-1">
+        <inputEntry id="UnaryTests_0aru835">        <text><![CDATA["task1"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_0xi4fl5">        <text><![CDATA["end"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_1z0pd82">        <text><![CDATA["Task 1 ended."]]></text>
+</outputEntry>
+      </rule>
+      <rule id="row-187037128-2">
+        <inputEntry id="UnaryTests_1ceu3gu">        <text><![CDATA["task3"]]></text>
+</inputEntry>
+        <inputEntry id="UnaryTests_04jx53s">        <text><![CDATA["end"]]></text>
+</inputEntry>
+        <outputEntry id="LiteralExpression_0b986qp">        <text><![CDATA["Task 3 ended."]]></text>
+</outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

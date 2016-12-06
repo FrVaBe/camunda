@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.4.0">
+  <bpmn:process id="variableScopeDemo" name="variable Scope Demo" isExecutable="true">
+    <bpmn:startEvent id="startEvent" name="start">
+      <bpmn:outgoing>SequenceFlow_06l03ul</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="setVariables" name="Set Variables" camunda:class="de.frvabe.bpm.camunda.tbt.variableScopeDemo.SetVariablesTask">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="de.frvabe.bpm.camunda.tbt.VariableDebugTaskListenerAndDelegate" event="end" />
+        <camunda:inputOutput>
+          <camunda:inputParameter name="inputParam">FooBar</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_06l03ul</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_03oofv0</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="debugVariableValues" name="Debug variable values" camunda:class="de.frvabe.bpm.camunda.tbt.VariableDebugTaskListenerAndDelegate">
+      <bpmn:incoming>SequenceFlow_03oofv0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0s1eyxt</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_06l03ul" sourceRef="startEvent" targetRef="setVariables" />
+    <bpmn:sequenceFlow id="SequenceFlow_03oofv0" sourceRef="setVariables" targetRef="debugVariableValues" />
+    <bpmn:endEvent id="endEvent" name="end">
+      <bpmn:incoming>SequenceFlow_0s1eyxt</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0s1eyxt" sourceRef="debugVariableValues" targetRef="endEvent" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="variableScopeDemo">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="startEvent">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="180" y="138" width="22" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_0v1sr1t_di" bpmnElement="setVariables">
+        <dc:Bounds x="291" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_02kh7c0_di" bpmnElement="debugVariableValues">
+        <dc:Bounds x="495" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_06l03ul_di" bpmnElement="SequenceFlow_06l03ul">
+        <di:waypoint xsi:type="dc:Point" x="209" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="291" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="250" y="95" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_03oofv0_di" bpmnElement="SequenceFlow_03oofv0">
+        <di:waypoint xsi:type="dc:Point" x="391" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="495" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="443" y="105" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EndEvent_13zsqic_di" bpmnElement="endEvent">
+        <dc:Bounds x="689" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="698" y="138" width="18" height="12" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0s1eyxt_di" bpmnElement="SequenceFlow_0s1eyxt">
+        <di:waypoint xsi:type="dc:Point" x="595" y="120" />
+        <di:waypoint xsi:type="dc:Point" x="689" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="642" y="95" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
