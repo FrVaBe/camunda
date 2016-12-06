@@ -39,7 +39,7 @@ I finally found a way to use a decision table for my goal to manage a *Custom Ev
 
  ![DM process configuration](src/main/resources/dmn/event-log-config.png)
 
-The rules in the diagram define _Events_ that I would like to handle in a special case. An _Event_ is specified by the _activityId_ and the _eventName_ as they occur in the process. The output of a rule is just a simple message that I can add to my Custom Event Log_.
+The rules in the diagram define _Events_ that I would like to handle in a special case. An _Event_ is specified by the _activityId_ and the _eventName_ as they occur in the process. The output of a rule is just a simple message that I can add to my Custom Event Log.
 
 On the Java Code side I implemented a [GlobalExecutionListener](src/main/java/de/frvabe/bpm/camunda/GlobalExecutionListener.java). This listener listens to each activity event that is executed by the process and if an activity/event matches a DM rule a custom treatment can be done. In my original use case I just add the rule output to a list of Strings. This list makes up my "Event Log" and I put it as a process variable to the process instance.
 
@@ -75,7 +75,7 @@ In the example code (see snippet below) here I just print the output message to 
     }
 ```
 
-Oh, how did I manage to attach the Listener to all process activities? My project is a Spring Boot project using the [camunda-bpm-spring-boot-starter](https://github.com/camunda/camunda-bpm-spring-boot-starter)). My Main class (wich is also the root of my Spring context configuration) extends the [SpringBootProcessApplication](https://github.com/camunda/camunda-bpm-spring-boot-starter/blob/master/extension/starter/src/main/java/org/camunda/bpm/spring/boot/starter/SpringBootProcessApplication.java) and overrides the _getExecutionListener_ method (therefore the [Process Engine Plugin](https://docs.camunda.org/manual/latest/user-guide/process-applications/process-application-event-listeners/) needs to be activated). How simple is that?
+Oh, how did I manage to attach the Listener to all process activities? My project is a Spring Boot project using the [camunda-bpm-spring-boot-starter](https://github.com/camunda/camunda-bpm-spring-boot-starter). My Main class (wich is also the root of my Spring context configuration) extends the [SpringBootProcessApplication](https://github.com/camunda/camunda-bpm-spring-boot-starter/blob/master/extension/starter/src/main/java/org/camunda/bpm/spring/boot/starter/SpringBootProcessApplication.java) and overrides the _getExecutionListener_ method (therefore the [Process Engine Plugin](https://docs.camunda.org/manual/latest/user-guide/process-applications/process-application-event-listeners/) needs to be activated). How simple is that?
 
 ```java
 package de.frvabe.bpm.camunda;
@@ -107,7 +107,7 @@ public class Main extends SpringBootProcessApplication {
 
 ## Conclusion
 
-I think I found an interesting approach to implement something that I would call a "Custom EventLog" using BPM and DM.
+I think I found an interesting approach to implement something that I would call a "Custom EventLog" using BPM and DM. It offers great flexibility in choosing (and changing) Events that should be logged without changing the process.
 
 But - to be honest -  I am not really sure if this is the way to go. Some disadvanteges I see are
 * overhead of (useless) GlobalExecutionListener invocations and rule processing
