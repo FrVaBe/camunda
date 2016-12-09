@@ -18,4 +18,4 @@ This demo project covers some possibilities how to validate a BPMN process descr
 _Disclaimer_
 
 This project does not contain a set of comprehensice validation checks; In fact, I have only touched the subject here rudimentarily.
-I will probably need the project as entry point for further investigantions on this topic (if needed by me).
+I will probably need the project as entry point for further investigations on this topic (if needed by me).
