@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.6.0">
+  <bpmn:message id="Message_15p82c3" name="Message_0ce7iah" />
+  <bpmn:message id="Message_0gglobk" name="Message_0ufmb04" />
+  <bpmn:message id="Message_06vdc9s" name="Message_2m76fh2" />
+  <bpmn:message id="Message_0oilxi8" name="newIncident" />
+  <bpmn:process id="demoProcess" name="Demo Process" isExecutable="true">
+    <bpmn:startEvent id="helloWorldStartEvent">
+      <bpmn:outgoing>SequenceFlow_1e5up1p</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="helloWorldEndEvent">
+      <bpmn:incoming>SequenceFlow_0qwpxca</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1e5up1p" sourceRef="helloWorldStartEvent" targetRef="prepareState" />
+    <bpmn:sequenceFlow id="SequenceFlow_0na5nsi" sourceRef="prepareState" targetRef="treatOutside" />
+    <bpmn:serviceTask id="prepareState" name="Prepare State" camunda:class="de.frvabe.bpm.camunda.PrepareStateTask">
+      <bpmn:incoming>SequenceFlow_1e5up1p</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0na5nsi</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0qwpxca" sourceRef="treatOutside" targetRef="helloWorldEndEvent" />
+    <bpmn:serviceTask id="treatOutside" name="Treat Outside" camunda:type="external" camunda:topic="externalTaskTopic">
+      <bpmn:incoming>SequenceFlow_0na5nsi</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0qwpxca</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:textAnnotation id="TextAnnotation_19wtxiv">    <bpmn:text>external Task</bpmn:text>
+</bpmn:textAnnotation>
+    <bpmn:association id="Association_0g9j5j3" sourceRef="treatOutside" targetRef="TextAnnotation_19wtxiv" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="demoProcess">
+      <bpmndi:BPMNShape id="StartEvent_0j9of3g_di" bpmnElement="helloWorldStartEvent">
+        <dc:Bounds x="257" y="180" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="275" y="216" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0sitbe1_di" bpmnElement="helloWorldEndEvent">
+        <dc:Bounds x="795" y="180" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="813" y="216" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1e5up1p_di" bpmnElement="SequenceFlow_1e5up1p">
+        <di:waypoint xsi:type="dc:Point" x="293" y="198" />
+        <di:waypoint xsi:type="dc:Point" x="371" y="198" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="332" y="183" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0na5nsi_di" bpmnElement="SequenceFlow_0na5nsi">
+        <di:waypoint xsi:type="dc:Point" x="471" y="198" />
+        <di:waypoint xsi:type="dc:Point" x="566" y="198" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="519" y="183" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0vfydaf_di" bpmnElement="prepareState">
+        <dc:Bounds x="371" y="158" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0qwpxca_di" bpmnElement="SequenceFlow_0qwpxca">
+        <di:waypoint xsi:type="dc:Point" x="666" y="198" />
+        <di:waypoint xsi:type="dc:Point" x="795" y="198" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="731" y="183" width="0" height="0" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_01vj84b_di" bpmnElement="treatOutside">
+        <dc:Bounds x="566" y="158" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_19wtxiv_di" bpmnElement="TextAnnotation_19wtxiv">
+        <dc:Bounds x="657" y="268" width="100" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0g9j5j3_di" bpmnElement="Association_0g9j5j3">
+        <di:waypoint xsi:type="dc:Point" x="657" y="237" />
+        <di:waypoint xsi:type="dc:Point" x="691" y="268" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
