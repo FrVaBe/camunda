@@ -4,14 +4,14 @@
   <bpmn:message id="Message_0gglobk" name="Message_0ufmb04" />
   <bpmn:message id="Message_06vdc9s" name="Message_2m76fh2" />
   <bpmn:message id="Message_0oilxi8" name="newIncident" />
-  <bpmn:process id="demoProcess" name="Demo Process" isExecutable="true">
-    <bpmn:startEvent id="demoProcessStartEvent">
+  <bpmn:process id="demoProcessWithTimerDate" name="Demo Process" isExecutable="true">
+    <bpmn:startEvent id="demoProcessWithTimerDateStartEvent">
       <bpmn:outgoing>SequenceFlow_05no2et</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="demoProcessEndEvent">
       <bpmn:incoming>SequenceFlow_0quzrxo</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_05no2et" name="Set followUpDate &#10;process variable here&#10;" sourceRef="demoProcessStartEvent" targetRef="demoTask">
+    <bpmn:sequenceFlow id="SequenceFlow_05no2et" name="Set followUpDate &#10;process variable here&#10;" sourceRef="demoProcessWithTimerDateStartEvent" targetRef="demoTask">
       <bpmn:extensionElements>
         <camunda:executionListener expression="${execution.setVariable(&#39;demoTask.followUpDate&#39;, dateTime().plusSeconds(3).toDate())}" event="take" />
       </bpmn:extensionElements>
@@ -37,8 +37,8 @@ property
     <bpmn:association id="Association_0bhfe93" sourceRef="demoTask" targetRef="TextAnnotation_1mdnpi6" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="demoProcess">
-      <bpmndi:BPMNShape id="StartEvent_0j9of3g_di" bpmnElement="demoProcessStartEvent">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="demoProcessWithTimerDate">
+      <bpmndi:BPMNShape id="StartEvent_0j9of3g_di" bpmnElement="demoProcessWithTimerDateStartEvent">
         <dc:Bounds x="257" y="180" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="275" y="216" width="0" height="0" />

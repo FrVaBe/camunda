@@ -1,10 +1,13 @@
 package de.frvabe.bpm.camunda;
 
 import org.camunda.bpm.application.ProcessApplication;
+import org.camunda.bpm.engine.ProcessEngine;
+import org.camunda.bpm.engine.impl.ProcessEngineImpl;
 import org.camunda.bpm.spring.boot.starter.SpringBootProcessApplication;
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * The main class which can be used to start the application.
@@ -12,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication()
 @ProcessApplication
 public class Main extends SpringBootProcessApplication {
-    
+
 
     /**
      * Main method to start the application.
@@ -22,6 +25,8 @@ public class Main extends SpringBootProcessApplication {
      * program arguments. Possible properties are documented in the {@code application.properties}
      * file that is located in this jar.
      * </p>
+     * The application will be accessible here: {@code http://localhost:8080/index.html} - or the
+     * REST endpoint here: {@code http://localhost:8080/rest/process-instance}
      * 
      * @param args application properties can be provided as arguments in Spring Boot notation (
      *        {@code --property=value}) but also as system properties or in an property file.
@@ -33,7 +38,10 @@ public class Main extends SpringBootProcessApplication {
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(Main.class);
         app.setBannerMode(Banner.Mode.LOG);
-        app.run(args);
+        ConfigurableApplicationContext ctx = app.run(args);
+        
+        ProcessEngineImpl pe = (ProcessEngineImpl) ctx.getBean(ProcessEngine.class);
+        pe.getProcessEngineConfiguration().setDefaultSerializationFormat("application/json");
     }
 
 }
