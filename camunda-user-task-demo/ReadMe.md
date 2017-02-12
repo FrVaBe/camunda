@@ -28,11 +28,11 @@ This defines a `demoTask.followUpDate` process variable with the time "5 seconds
 ${execution.getVariable('demoTask.followUpDate')}
 ```
 
-Have a look at the model for details on this configuration. The timer - by the way - is a none interrupting timer in this model and the action that should be triggered when the timer fires is expected to be implemented in a listener (here [DemoTaskBoundaryTimerListener](/src/main/java/de/frvabe/bpm/camunda/DemoTaskBoundaryTimerListener.java)). You can also use an interrupting timer event of course to interrupt the activity and to continue the process on an alternative process path.
+Have a look at the model for details on this configuration. The timer - by the way - is a none interrupting timer in this model and the action that should be triggered when the timer fires is expected to be implemented in a listener (here [DemoTaskBoundaryTimerListener](src/main/java/de/frvabe/bpm/camunda/DemoTaskBoundaryTimerListener.java)). You can also use an interrupting timer event of course to interrupt the activity and to continue the process on an alternative process path.
 
 **Resources of this example:**
 * BPMN model ([demoProcessWithTimerDate.bpmn](src/main/resources/bpmn/demoProcessWithTimerDate.bpmn))
-* Timer Event Listener ([DemoTaskBoundaryTimerListener](/src/main/java/de/frvabe/bpm/camunda/DemoTaskBoundaryTimerListener.java))
+* Timer Event Listener ([DemoTaskBoundaryTimerListener](src/main/java/de/frvabe/bpm/camunda/DemoTaskBoundaryTimerListener.java))
 * JUnit test ([UserTaskTest.timerWithTimeDate()](src/test/java/de/frvabe/bpm/camunda/UserTaskTest.java))
 
 ## Timer Boundary Event with Time Cycle
@@ -42,7 +42,7 @@ Another approach to model a follow-up date with an automatic corresponding actio
 This is done in the following example.
 
 ![Demo Process With TimerDate](src/main/resources/bpmn/demoProcessWithTimerCycle.png)   
-**Figure 2:** demo process with timer cycle ([BPMN model](src\camunda\camunda-user-task-demo\src\main\resources\bpmn\demoProcessWithTimerCycle.bpmn))
+**Figure 2:** demo process with timer cycle ([BPMN model](src/main/resources/bpmn/demoProcessWithTimerCycle.bpmn))
 
 
 The follow-up date is set on the user task this way
@@ -82,5 +82,5 @@ Note: The timer fires way to often (more than once a second) in this example. I 
 
 **Ressources of this example:**
 * BPMN model ([demoProcessWithTimerCycle.bpmn](src/main/resources/bpmn/demoProcessWithTimerCycle.bpmn))
-* Timer Event Listener ([DemoTaskBoundaryTimerListener](/src/main/java/de/frvabe/bpm/camunda/DemoTaskBoundaryTimerListener.java))
+* Timer Event Listener ([DemoTaskBoundaryTimerListener](src/main/java/de/frvabe/bpm/camunda/DemoTaskBoundaryTimerListener.java))
 * JUnit test ([UserTaskTest.timerWithTimeCycle()](src/test/java/de/frvabe/bpm/camunda/UserTaskTest.java))
