@@ -13,7 +13,7 @@ In the following process model the boundary timer event is defined with a [Time 
 The challenging aspect is to bring the timer date in sync with the follow-up (or due) date from the User Task.
 
 ![Demo Process With TimerDate](src/main/resources/bpmn/demoProcessWithTimerDate.png)   
-**Figure 1:** demo process with timer date ([BPMN model](src/camunda/camunda-user-task-demo/src/main/resources/bpmn/demoProcessWithTimerDate.bpmn))
+**Figure 1:** demo process with timer date ([BPMN model](src/main/resources/bpmn/demoProcessWithTimerDate.bpmn))
 
 The user task should be followed-up after a specific period of time after the user task started. This can be configured in the BPMN Model. But to have the boundary timer event fired on the same date, the date definition has to be configured on the timer event as well. Thus we need to - _manually_ - keep two date definitions of the model in sync - which is hard.
 A nicer approach is to define the follow-up date as a process variable in the process flow element that points to the user task, like it is done in the example on a listener of the sequence flow element like this
