@@ -1,6 +1,6 @@
 # camunda-user-task-demo
 
-User tasks (in general) often work with follow-up or due dates. Camunda BPM does support this by providing corresponding properties / members on the [User Task BPMN element](https://docs.camunda.org/manual/7.6/reference/bpmn20/tasks/user-task/).
+User tasks (in general) often work with follow-up or due dates. [Camunda BPM](https://camunda.org/) does support this by providing corresponding properties / members on the [User Task BPMN element](https://docs.camunda.org/manual/7.6/reference/bpmn20/tasks/user-task/).
 The Camunda API allows to filter user tasks by these dates so that due or overdue tasks can be found easily.
 
 Beside the query filter also [Timer Boundary Events](https://docs.camunda.org/manual/7.6/reference/bpmn20/events/timer-events/#timer-boundary-event) on user tasks can be used to "detect" the maturity of a user task and to trigger an automatic action.
