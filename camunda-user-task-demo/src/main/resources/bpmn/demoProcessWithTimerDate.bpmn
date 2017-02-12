@@ -13,7 +13,7 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_05no2et" name="Set followUpDate &#10;process variable here&#10;" sourceRef="demoProcessWithTimerDateStartEvent" targetRef="demoTask">
       <bpmn:extensionElements>
-        <camunda:executionListener expression="${execution.setVariable(&#39;demoTask.followUpDate&#39;, dateTime().plusSeconds(3).toDate())}" event="take" />
+        <camunda:executionListener expression="${execution.setVariable(&#39;demoTask.followUpDate&#39;, dateTime().plusSeconds(5).toDate())}" event="take" />
       </bpmn:extensionElements>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0quzrxo" sourceRef="demoTask" targetRef="demoProcessEndEvent" />

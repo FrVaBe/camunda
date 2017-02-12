@@ -19,8 +19,8 @@ public class DemoTaskBoundaryTimerListener implements ExecutionListener {
 
     @Override
     public void notify(DelegateExecution execution) throws Exception {
-        LOGGER.info(">>>>>>>>>>>>>>>>>>>>>>>>>>> Timer fired at " + new Date() + " in Scope "
-                + execution.getId());
+
+        LOGGER.info("Timer fired at " + new Date() + " in Scope " + execution.getId());
 
         // fetch the BPMN model ID of the timer event
         String timerEventId = execution.getCurrentActivityId();
@@ -31,9 +31,16 @@ public class DemoTaskBoundaryTimerListener implements ExecutionListener {
         Task task = execution.getProcessEngineServices().getTaskService().createTaskQuery()
                 .executionId(timerJob.getExecutionId()).singleResult();
 
-        // set a triggerd marker variable on the local task scope
-        execution.getProcessEngineServices().getRuntimeService().setVariableLocal(task.getExecutionId(),
-                "demoTaskBoundaryEvent.fired", true);
+        if (task.getFollowUpDate() != null && task.getFollowUpDate().before(new Date())) {
+            LOGGER.info("the follow up date (" + task.getFollowUpDate()
+                    + ") of the User Task was reached");
+            execution.getProcessEngineServices().getRuntimeService().setVariableLocal(
+                    task.getExecutionId(), "demoTaskBoundaryEvent.followUpDateReached", true);
+        }
+
+        // set a trigger marker variable on the local task scope
+        execution.getProcessEngineServices().getRuntimeService()
+                .setVariableLocal(task.getExecutionId(), "demoTaskBoundaryEvent.fired", true);
 
     }
 

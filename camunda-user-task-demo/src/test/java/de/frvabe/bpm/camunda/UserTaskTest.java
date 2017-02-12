@@ -2,6 +2,7 @@ package de.frvabe.bpm.camunda;
 
 import static org.camunda.bpm.engine.test.assertions.ProcessEngineAssertions.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -13,21 +14,15 @@ import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.task.Task;
-import org.camunda.bpm.engine.test.Deployment;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {Main.class})
-@Deployment(resources = "bpmn/demoProcess.bpmn")
 public class UserTaskTest {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserTaskTest.class);
 
     @Autowired
     RuntimeService runtimeService;
@@ -36,12 +31,12 @@ public class UserTaskTest {
     TaskService taskService;
 
     /**
-     * Checks if an unblocking outpound event of a User Task gets fired.
+     * Checks if an unblocking outbound event of a User Task gets fired on the follow up date.
      * 
      * @throws InterruptedException
      */
     @Test
-    public void timeWithTimerDate() throws InterruptedException {
+    public void timerWithTimerDate() throws InterruptedException {
 
         // start a process; the follow up date of the Demo Task will be set to 3 seconds from now
 
@@ -51,46 +46,71 @@ public class UserTaskTest {
         Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId())
                 .singleResult();
 
-        LOGGER.info("Process executionId        : " + processInstance.getId());
-        LOGGER.info("Task executionId           : " + task.getExecutionId());
-        LOGGER.info("Task getTaskDefinitionKey(): " + task.getTaskDefinitionKey());
-
-
         Map<String, Object> variables = runtimeService.getVariables(processInstance.getId());
-        assertEquals(1, variables.size());
         assertTrue(variables.containsKey("demoTask.followUpDate"));
 
         Map<String, Object> variablesLocal =
                 runtimeService.getVariablesLocal(task.getExecutionId());
-        assertEquals(0, variablesLocal.size());
+        assertFalse(variablesLocal.containsKey("demoTaskBoundaryEvent.fired"));
 
-        LOGGER.info("##################### " + (Date) variables.get("demoTask.followUpDate"));
-
-        Thread.sleep(2000); // nothing should have changed
-
-        LOGGER.info("##################### 1. check at " + new Date());
+        Thread.sleep(2500); // nothing should have changed
 
         variables = runtimeService.getVariables(processInstance.getId());
-        assertEquals(1, variables.size());
         assertTrue(variables.containsKey("demoTask.followUpDate"));
 
         variablesLocal = runtimeService.getVariablesLocal(task.getExecutionId());
-        assertEquals(0, variablesLocal.size());
+        assertFalse(variablesLocal.containsKey("demoTaskBoundaryEvent.fired"));
 
-        Thread.sleep(10000); // timer is expected to have been fired after this sleep
-
-        System.out.println("##################### 2. check at " + new Date());
+        Thread.sleep(7500); // timer is expected to have been fired after this sleep
 
         variables = runtimeService.getVariables(processInstance.getId());
-        assertEquals(1, variables.size());
         assertTrue(variables.containsKey("demoTask.followUpDate"));
 
         variablesLocal = runtimeService.getVariablesLocal(task.getExecutionId());
-        assertEquals(1, variablesLocal.size());
         assertTrue(variablesLocal.containsKey("demoTaskBoundaryEvent.fired"));
+
+        // cleanup after test
+        runtimeService.deleteProcessInstance(processInstance.getId(), "JUnit test");
 
     }
 
+    /**
+     * Checks if a Timer with cycle detects the maturity of a User Task.
+     * 
+     * @throws InterruptedException
+     */
+    @Test
+    public void timerWithTimeCycle() throws InterruptedException {
+
+        // start a process; the follow up date of the Demo Task will be set to 3 seconds from now
+
+        ProcessInstance processInstance =
+                runtimeService.startProcessInstanceByKey("demoProcessWithTimerCycle");
+        assertThat(processInstance).isNotNull();
+        Task task = taskService.createTaskQuery().processInstanceId(processInstance.getId())
+                .singleResult();
+
+        assertNotNull(task.getFollowUpDate());
+        assertTrue(task.getFollowUpDate().after(new Date()));
+
+        Map<String, Object> variablesLocal =
+                runtimeService.getVariablesLocal(task.getExecutionId());
+        assertFalse(variablesLocal.containsKey("demoTaskBoundaryEvent.followUpDateReached"));
+
+        Thread.sleep(2000); // nothing should have changed
+
+        variablesLocal = runtimeService.getVariablesLocal(task.getExecutionId());
+        assertFalse(variablesLocal.containsKey("demoTaskBoundaryEvent.followUpDateReached"));
+
+        Thread.sleep(7500); // timer is expected to have been fired after this sleep
+
+        variablesLocal = runtimeService.getVariablesLocal(task.getExecutionId());
+        assertTrue(variablesLocal.containsKey("demoTaskBoundaryEvent.followUpDateReached"));
+
+        // cleanup after test
+        runtimeService.deleteProcessInstance(processInstance.getId(), "JUnit test");
+
+    }
 
     /**
      * Test to update the followUp date of a given user task instance. Also check of task scope
@@ -126,6 +146,9 @@ public class UserTaskTest {
 
         // check task scope variable
         assertEquals("bar", runtimeService.getVariableLocal(task.getExecutionId(), "foo"));
+
+        // cleanup after test
+        runtimeService.deleteProcessInstance(processInstance.getId(), "JUnit test");
 
     }
 

@@ -39,7 +39,9 @@ public class Main extends SpringBootProcessApplication {
         SpringApplication app = new SpringApplication(Main.class);
         app.setBannerMode(Banner.Mode.LOG);
         ConfigurableApplicationContext ctx = app.run(args);
-        
+
+        // set default serialization format to JSON
+        // (does not work via property with camunda spring boot starter 2.0)
         ProcessEngineImpl pe = (ProcessEngineImpl) ctx.getBean(ProcessEngine.class);
         pe.getProcessEngineConfiguration().setDefaultSerializationFormat("application/json");
     }
