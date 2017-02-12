@@ -80,7 +80,7 @@ The hard part is to get the value of the follow-up date of the user task inside 
 
 Note: The timer fires way to often (more than once a second) in this example. I am not sure why, maybe the interval is too small or I made a configuration mistake. In production code it will probably be OK to have a way more "relaxed" timer cycle.
 
-**Ressources of this example:**
+**Resources of this example:**
 * BPMN model ([demoProcessWithTimerCycle.bpmn](src/main/resources/bpmn/demoProcessWithTimerCycle.bpmn))
 * Timer Event Listener ([DemoTaskBoundaryTimerListener](src/main/java/de/frvabe/bpm/camunda/DemoTaskBoundaryTimerListener.java))
 * JUnit test ([UserTaskTest.timerWithTimeCycle()](src/test/java/de/frvabe/bpm/camunda/UserTaskTest.java))
