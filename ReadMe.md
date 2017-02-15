@@ -7,13 +7,14 @@ Feel free to have a look and take the samples as blueprints for your own investi
 
 **more or less active**
 
-|Modul                           |Description                                |
-|--------------------------------|-------------------------------------------|
-|camunda-bpmn-validation         |Attempts to validate BPMN desciptions      |
-|camunda-customizable-event-log  |Approach to support a customizable Event Log|
-|camunda-hello-world             |Hello World Sample                         |
-|camunda-variable-scope-demo     |Sample to investigate Variable and Module Scopes|
-|camunda-user-task-demo     |User Task related process flow demonstartion |
+|Modul                           |Description                                      |
+|--------------------------------|-------------------------------------------------|
+|camunda-bpmn-validation         |Attempts to validate BPMN desciptions            |
+|camunda-customizable-event-log  |Approach to support a customizable Event Log     |
+|camunda-hello-world             |Hello World Sample                               |
+|camunda-variable-scope-demo     |Sample to investigate Variable and Module Scopes |
+|camunda-user-task-demo          |User Task related process flow demonstration     |
+|camunda-event-demo              |Project to demonstrate the use of events         |
 
 **deprecated**
 
