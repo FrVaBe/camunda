@@ -11,10 +11,16 @@ Content will be added as needed.
     <th>Code Example</th>
   </tr>
   <tr>
-    <td>[demoProcessWithMessageBoundaryCatchEvent.bpmn](src/main/resources/bpmn/demoProcessWithMessageBoundaryCatchEvent.bpmn)</td>
-    <td>[de.frvabe.bpm.camunda.MessageBoundaryCatchEventTest](src/test/java/de/frvabe/bpm/camunda/MessageBoundaryCatchEventTest.java)</td>
+    <td>
+      <a href="src/main/resources/bpmn/demoProcessWithMessageBoundaryCatchEvent.bpmn">demoProcessWithMessageBoundaryCatchEvent.bpmn</a>
+    </td>
+    <td>
+      <a href="src/test/java/de/frvabe/bpm/camunda/MessageBoundaryCatchEventTest.java">de.frvabe.bpm.camunda.MessageBoundaryCatchEventTest</a>
+    </td>
   </tr>
   <tr>
-    <td colspan="2">![BPMN diagram](src/main/resources/bpmn/demoProcessWithMessageBoundaryCatchEvent.png)   </td>
+    <td colspan="2">
+      <img src="src/main/resources/bpmn/demoProcessWithMessageBoundaryCatchEvent.png" alt="BPMN diagram">
+    </td>
   </tr>
 </table>
