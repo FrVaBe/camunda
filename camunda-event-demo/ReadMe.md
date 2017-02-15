@@ -19,7 +19,7 @@ Content will be added as needed.
     </td>
   </tr>
   <tr>
-    <td colspan="2">
+    <td colspan="2" align="center">
       <img src="src/main/resources/bpmn/demoProcessWithMessageBoundaryCatchEvent.png" alt="BPMN diagram">
     </td>
   </tr>
