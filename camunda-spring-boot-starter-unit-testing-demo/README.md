@@ -1,4 +1,4 @@
-# Camunda Spring Boot Starter Unit Testing Demon
+# Camunda Spring Boot Starter Unit Testing Demo
 
 This is a showcase on how to write [Camunda BPM](https://camunda.org/) related
 unit tests using the [Camunda Spring Boot Starter](https://github.com/camunda/camunda-bpm-spring-boot-starter) component.
