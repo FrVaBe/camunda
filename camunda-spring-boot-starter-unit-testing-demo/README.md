@@ -71,7 +71,7 @@ src
 
 Have a look at the project. There are two tests
 
-- [ProductionProcessTest.java](src/main/java/de/frvabe/bpm.camunda/ProductionProcessTest.java) and  
-- [TestProcessTest.java](src/test/java/de/frvabe/bpm.camunda/TestProcessTest.java).
+- [ProductionProcessTest.java](src/test/java/de/frvabe/bpm/camunda/ProductionProcessTest.java) and  
+- [TestProcessTest.java](src/test/java/de/frvabe/bpm/camunda/TestProcessTest.java).
 
 Both tests try to start the corresponding process and should succeed.
