@@ -21,8 +21,6 @@ public class PrepareStateTask implements JavaDelegate {
         execution.setVariable("integerValue", obj.getIntegerValue());
         execution.setVariable("booleanValue", obj.getBooleanValue());
 
-        System.out.println("preparation of process state done");
-
     }
 
 }
